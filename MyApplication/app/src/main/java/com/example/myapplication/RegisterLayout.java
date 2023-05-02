@@ -18,10 +18,9 @@ public class RegisterLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_layout);
 
+        //Back Button
         Log.d(TAG, "onCreate: Starting");
-
         Button BackButton = (Button) findViewById(R.id.BackButton);
-
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

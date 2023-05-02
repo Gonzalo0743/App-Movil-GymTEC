@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-        Log.d(TAG, "onCreate: Starting");
 
+        //Register Button
+        Log.d(TAG, "onCreate: Starting");
         Button RegisterButton = (Button) findViewById(R.id.RegisterButton);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
