@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterLayout"></activity>
+        <activity android:name=".SearchLayout"></activity>
+        <activity android:name=".LessonsLayout"></activity>
     </application>
 
 </manifest>
