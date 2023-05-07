@@ -24,10 +24,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    /**
+     * Este metodo se encarga de mostrar la primera pestaña o apartado de la aplicacion en este caso la correspondiente al incio de
+     * sesión.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: Starting");
         Button RegisterButton = (Button) findViewById(R.id.RegisterButton);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Este metodo se encarga de activar el boton que te envia a la pestaña de regsitro de usiario
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Clicked RegisterButton");
@@ -47,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         });
         Button LoginButton = (Button) findViewById(R.id.LoginButton);
         LoginButton.setOnClickListener((new View.OnClickListener(){
+            /**
+             * Este metodo se encarga de aplicar el inicio de sesión segun los datos proporcionados
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v){
                 Log.d(TAG, "onClick: Clicked RegisterButton");
