@@ -31,7 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         "client_id TEXT PRIMARY KEY NOT NULL," +
                         "address TEXT," +
                         "weight INTEGER," +
-                        "imc REAL," +
+                        "imc INTEGER," +
                         "fname TEXT NOT NULL," +
                         "sname TEXT," +
                         "password TEXT NOT NULL," +
