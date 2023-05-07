@@ -24,6 +24,10 @@ public class DbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     *
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
@@ -62,6 +66,12 @@ public class DbHelper extends SQLiteOpenHelper {
         );
     }
 
+    /**
+     *
+     * @param sqLiteDatabase The database.
+     * @param i The old database version.
+     * @param i1 The new database version.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
@@ -73,6 +83,19 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     //Métodos Insert de tablas que los ocupan
+
+    /**
+     *
+     * @param client_id
+     * @param address
+     * @param weight
+     * @param imc
+     * @param fname
+     * @param sname
+     * @param password
+     * @param bdate
+     * @param email
+     */
     public void insertClient(String client_id, String address, int weight, float imc, String fname, String sname, String password, String bdate, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cV = new ContentValues();
@@ -89,6 +112,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     *
+     * @param client_id
+     * @param lesson_id
+     */
     public void insertClientLesson(String client_id, int lesson_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cV = new ContentValues();
@@ -166,6 +194,11 @@ public class DbHelper extends SQLiteOpenHelper {
 //        return data;
 //    }
 
+    /**
+     * 
+     * @param table
+     * @return
+     */
     public Cursor getAllTable(String table) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table, null);
