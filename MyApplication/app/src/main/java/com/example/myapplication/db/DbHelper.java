@@ -51,11 +51,14 @@ public class DbHelper extends SQLiteOpenHelper {
                         "end_date TEXT," +
                         "branch_name TEXT NOT NULL," +
                         "instructor_id TEXT NOT NULL," +
-                        "service_id TEXT NOT NULL)");
+                        "service_id TEXT NOT NULL,"+
+                        " FOREIGN KEY (service_id) REFERENCES t_service(service_id))");
         db.execSQL(
                 "CREATE TABLE " + TABLE_CLIENT_LESSON + "(" +
                         "client_id TEXT NOT NULL," +
-                        "lesson_id INTEGER NOT NULL)"
+                        "lesson_id INTEGER NOT NULL," +
+                        " FOREIGN KEY (client_id) REFERENCES t_client(client_id)," +
+                        " FOREIGN KEY (lesson_id) REFERENCES t_lesson(lesson_id))"
         );
     }
 
