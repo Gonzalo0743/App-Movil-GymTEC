@@ -75,8 +75,15 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v){
+                MD5 coder = new MD5();
                 String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
+                String password = null;
+                try {
+                    password = coder.md5(passwordInput.getText().toString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
 
                 if (email.equals("") || password.equals(""))
                     Toast.makeText(MainActivity.this, "ENTER ALL FIELDS", Toast.LENGTH_SHORT).show();
@@ -90,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "INVALID EMAIL OR PASSWORD", Toast.LENGTH_SHORT).show();
                     }
                 }
-//                Intent intentt = new Intent(MainActivity.this, SearchLayout.class);
-//                        startActivity(intentt);
             }
         }));
 
