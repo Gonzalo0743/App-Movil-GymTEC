@@ -119,17 +119,8 @@ public class DbHelper extends SQLiteOpenHelper {
         }else{
             Toast.makeText(context, "ADDED SUCCESFULLY", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-//    public Boolean LoginCheckEmail(String email){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("Select * from users where email = ?", new String[] {email});
-//        if (cursor.getCount()>0)
-//            return true;
-//        else
-//            return false;
-//    }
 
     public Boolean LoginCheckPassword(String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -150,8 +141,12 @@ public class DbHelper extends SQLiteOpenHelper {
         ContentValues cV = new ContentValues();
         cV.put("client_id", client_id);
         cV.put("lesson_id", lesson_id);
-        db.insert(TABLE_CLIENT_LESSON, null, cV);
-        db.close();
+        long result = db.insert(TABLE_CLIENT_LESSON, null, cV);
+        if (result == -1){
+            Toast.makeText(context, "FAILED", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "ADDED SUCCESFULLY", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Métodos Delete de tablas que los ocupan
@@ -172,69 +167,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Métodos Get de tablas que los ocupan
-//    public List<String> getService() {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        //String[] columns = {"service_id"};
-//
-//        Cursor cursor = db.query(TABLE_SERVICE, null, null, null, null, null, null);
-//
-//        List<String> data = new ArrayList<>();
-//
-//        while (cursor.moveToNext()) {
-//            String service_id = cursor.getString(cursor.getColumnIndex("service_id"));
-//            data.add(service_id);
-//        }
-//
-//        cursor.close();
-//
-//        return data;
-//    }
+    public Cursor readAllLessons() {
+        String query = "SELECT * FROM " + TABLE_LESSON;
+        SQLiteDatabase db = this.getReadableDatabase();
 
-//    public ArrayList<DataModel> getDataByName(String name) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ArrayList<DataModel> dataList = new ArrayList<>();
-//        Cursor cursor = db.query(TABLE_NAME, null, "name=?", new String[]{name}, null, null, null);
-//        if (cursor.moveToFirst()) {
-//            do {
-//                int id = cursor.getInt(cursor.getColumnIndex(ID));
-//                String nameValue = cursor.getString(cursor.getColumnIndex(NAME));
-//                int age = cursor.getInt(cursor.getColumnIndex(AGE));
-//                DataModel data = new DataModel(id, nameValue, age);
-//                dataList.add(data);
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        db.close();
-//        return dataList;
-//    }
-
-//    public ArrayList<String> getDataByColumn(String tableName, String[] columns) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ArrayList<String> data = new ArrayList<>();
-//
-//        Cursor cursor = db.query(tableName, columns, null, null, null, null, null);
-//
-//        while (cursor.moveToNext()) {
-//            for (int i = 0; i < columns.length; i++) {
-//                String columnData = cursor.getString(cursor.getColumnIndex(columns[i]));
-//                data.add(columnData);
-//            }
-//        }
-//        cursor.close();
-//        db.close();
-//        return data;
-//    }
-
-    /**
-     * 
-     * @param table
-     * @return
-     */
-    public Cursor getAllTable(String table) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table, null);
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
+        }
         return cursor;
     }
 
