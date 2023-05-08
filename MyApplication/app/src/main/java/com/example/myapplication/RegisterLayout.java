@@ -68,10 +68,6 @@ public class RegisterLayout extends AppCompatActivity {
                         bdateInput.getText().toString().trim(),
                         emailInput.getText().toString().trim()
                 );
-
-//                Log.d(TAG, "onClick: Clicked BackButton");
-//                Intent intent = new Intent(RegisterLayout.this, MainActivity.class);
-//                startActivity(intent);
             }
         });
     }

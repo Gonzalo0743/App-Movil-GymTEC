@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
-
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "GymTec.db";
     public static final String TABLE_CLIENT = "t_client";
@@ -79,10 +78,10 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_CLIENT);
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_SERVICE);
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_LESSON);
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_CLIENT_LESSON);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CLIENT);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_LESSON);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CLIENT_LESSON);
         onCreate(sqLiteDatabase);
     }
 
@@ -103,13 +102,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public void insertClient(String client_id, String address, int weight, int imc, String fname, String fLname, String sLname, String password, String bdate, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cV = new ContentValues();
+
         cV.put("client_id", client_id);
         cV.put("address", address);
         cV.put("weight", weight);
         cV.put("imc", imc);
         cV.put("fname", fname);
-        cV.put("sname", fLname);
-        cV.put("sname", sLname);
+        cV.put("fLname", fLname);
+        cV.put("sLname", sLname);
         cV.put("password", password);
         cV.put("bdate", bdate);
         cV.put("email", email);
@@ -119,7 +119,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }else{
             Toast.makeText(context, "ADDED SUCCESFULLY", Toast.LENGTH_SHORT).show();
         }
-        db.close();
+
     }
 
     /**
