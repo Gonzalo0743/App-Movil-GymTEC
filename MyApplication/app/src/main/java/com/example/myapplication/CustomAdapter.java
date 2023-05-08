@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
 
     Context context;
-    ArrayList lesson_id, quotas, 
+    ArrayList lesson_id, quotas, service_id;
 
-    CustomAdapter(){
+    CustomAdapter(Context context, ArrayList service_id, ArrayList lesson_id, ArrayList quotas){
 
     }
 
