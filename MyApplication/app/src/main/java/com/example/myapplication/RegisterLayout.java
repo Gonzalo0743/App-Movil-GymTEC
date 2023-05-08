@@ -16,7 +16,7 @@ public class RegisterLayout extends AppCompatActivity {
 
     private static final String TAG = "RegisterLayout";
 
-    EditText nameInput, lname1Input, lname2Input, idInput, ageInput, bdateInput, weightInput, bmiInput, addressInput, emailInput, passwordInput;
+    EditText nameInput, lname1Input, lname2Input, idInput, bdateInput, weightInput, bmiInput, addressInput, emailInput, passwordInput;
 
 
     @Override
@@ -28,7 +28,7 @@ public class RegisterLayout extends AppCompatActivity {
         lname1Input = findViewById(R.id.RegLName1);
         lname2Input = findViewById(R.id.RegLName2);
         idInput = findViewById(R.id.RegID);
-        ageInput = findViewById(R.id.RegAge);
+
         bdateInput = findViewById(R.id.RegBD);
         weightInput = findViewById(R.id.RegWeight);
         bmiInput = findViewById(R.id.RegBMI);
@@ -60,7 +60,13 @@ public class RegisterLayout extends AppCompatActivity {
                         idInput.getText().toString().trim(),
                         addressInput.getText().toString().trim(),
                         Integer.valueOf(weightInput.getText().toString().trim()),
-
+                        Integer.valueOf(bmiInput.getText().toString().trim()),
+                        nameInput.getText().toString().trim(),
+                        lname1Input.getText().toString().trim(),
+                        lname2Input.getText().toString().trim(),
+                        passwordInput.getText().toString().trim(),
+                        bdateInput.getText().toString().trim(),
+                        emailInput.getText().toString().trim()
                 );
 
 //                Log.d(TAG, "onClick: Clicked BackButton");

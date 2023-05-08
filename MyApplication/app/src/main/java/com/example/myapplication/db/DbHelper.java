@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -19,9 +20,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABLE_SERVICE = "t_service";
     public static final String TABLE_LESSON = "t_lesson";
     public static final String TABLE_CLIENT_LESSON = "t_client_lesson";
+    private Context context;
 
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     /**
@@ -37,7 +40,8 @@ public class DbHelper extends SQLiteOpenHelper {
                         "weight INTEGER," +
                         "imc INTEGER," +
                         "fname TEXT NOT NULL," +
-                        "sname TEXT," +
+                        "fLname TEXT," +
+                        "sLname TEXT," +
                         "password TEXT NOT NULL," +
                         "bdate TEXT," +
                         "email TEXT)");
@@ -91,12 +95,12 @@ public class DbHelper extends SQLiteOpenHelper {
      * @param weight
      * @param imc
      * @param fname
-     * @param sname
-     * @param password
+     * @param fLname
+     * @param sLname
      * @param bdate
      * @param email
      */
-    public void insertClient(String client_id, String address, int weight, float imc, String fname, String sname, String password, String bdate, String email) {
+    public void insertClient(String client_id, String address, int weight, int imc, String fname, String fLname, String sLname, String password, String bdate, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cV = new ContentValues();
         cV.put("client_id", client_id);
@@ -104,11 +108,17 @@ public class DbHelper extends SQLiteOpenHelper {
         cV.put("weight", weight);
         cV.put("imc", imc);
         cV.put("fname", fname);
-        cV.put("sname", sname);
+        cV.put("sname", fLname);
+        cV.put("sname", sLname);
         cV.put("password", password);
         cV.put("bdate", bdate);
         cV.put("email", email);
-        db.insert(TABLE_CLIENT, null, cV);
+        long result = db.insert(TABLE_CLIENT, null, cV);
+        if (result == -1){
+            Toast.makeText(context, "FAILED", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "ADDED SUCCESFULLY", Toast.LENGTH_SHORT).show();
+        }
         db.close();
     }
 
