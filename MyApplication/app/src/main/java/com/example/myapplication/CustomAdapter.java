@@ -1,27 +1,37 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
 
-    Context context;
-    ArrayList lesson_id, quotas, service_id;
+    private Context context;
+    private ArrayList lesson_id, quotas, service_id;
 
     CustomAdapter(Context context, ArrayList service_id, ArrayList lesson_id, ArrayList quotas){
+        this.context=context;
+        this.service_id=service_id;
+        this.lesson_id=lesson_id;
+        this.quotas=quotas;
 
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.lessons_layout,parent,false);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -35,6 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends  RecyclerView.ViewHolder{
+        TextView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
         }
