@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,18 +55,24 @@ public class RegisterLayout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DbHelper dbh = new DbHelper(RegisterLayout.this);
-                dbh.insertClient(
-                        idInput.getText().toString().trim(),
-                        addressInput.getText().toString().trim(),
-                        Integer.valueOf(weightInput.getText().toString().trim()),
-                        Integer.valueOf(bmiInput.getText().toString().trim()),
-                        nameInput.getText().toString().trim(),
-                        lname1Input.getText().toString().trim(),
-                        lname2Input.getText().toString().trim(),
-                        passwordInput.getText().toString().trim(),
-                        bdateInput.getText().toString().trim(),
-                        emailInput.getText().toString().trim()
-                );
+                MD5 coder = new MD5();
+                try {
+                    dbh.insertClient(
+
+                            idInput.getText().toString().trim(),
+                            addressInput.getText().toString().trim(),
+                            Integer.valueOf(weightInput.getText().toString().trim()),
+                            Integer.valueOf(bmiInput.getText().toString().trim()),
+                            nameInput.getText().toString().trim(),
+                            lname1Input.getText().toString().trim(),
+                            lname2Input.getText().toString().trim(),
+                            coder.md5(passwordInput.getText().toString().trim()),
+                            bdateInput.getText().toString().trim(),
+                            emailInput.getText().toString().trim()
+                    );
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

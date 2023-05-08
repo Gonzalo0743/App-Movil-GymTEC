@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * Este metodo se encarga de crear las tablas de la base de datos cuando este sea llamado.
      * @param db The database.
      */
     @Override
@@ -70,7 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * Este metodo se encarga de mantener el codigo bajo existencia intacto.
      * @param sqLiteDatabase The database.
      * @param i The old database version.
      * @param i1 The new database version.
@@ -88,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Métodos Insert de tablas que los ocupan
 
     /**
-     *
+     * Este metodo se encarga de crear todos los inserts dentro de la t6abla de clientes.
      * @param client_id
      * @param address
      * @param weight
@@ -141,7 +141,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * Este metodo se encarga de crear todas las inserciones en la tabla de lecciones
      * @param client_id
      * @param lesson_id
      */
@@ -155,6 +155,11 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Métodos Delete de tablas que los ocupan
+
+    /**
+     *
+     * @param client_id
+     */
     public void deleteClient(String client_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CLIENT, "client_id=?", new String[]{String.valueOf(client_id)});
