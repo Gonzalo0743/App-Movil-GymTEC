@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    EditText emailInput, passwordInput;
     /**
      * Este metodo se encarga de mostrar la primera pestaña o apartado de la aplicacion en este caso la correspondiente al incio de
      * sesión.
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        emailInput = findViewById(R.id.editTextTextEmailAddress);
+        passwordInput = findViewById(R.id.editTextTextPassword2);
 
         //Register Button
         Log.d(TAG, "onCreate: Starting");
@@ -59,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Login Button
         Button LoginButton = (Button) findViewById(R.id.LoginButton);
+        DbHelper dbHelper = new DbHelper(MainActivity.this);
         LoginButton.setOnClickListener((new View.OnClickListener(){
             /**
              * Este metodo se encarga de aplicar el inicio de sesión segun los datos proporcionados
@@ -67,14 +75,27 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v){
-                Log.d(TAG, "onClick: Clicked RegisterButton");
+                String email = emailInput.getText().toString();
+                String password = passwordInput.getText().toString();
 
-                Intent intentt = new Intent(MainActivity.this, SearchLayout.class);
-                startActivity(intentt);
+                if (email.equals("") || password.equals(""))
+                    Toast.makeText(MainActivity.this, "ENTER ALL FIELDS", Toast.LENGTH_SHORT).show();
+                else{
+                    Boolean Login = dbHelper.LoginCheckPassword(email, password);
+                    if(Login){
+                        Toast.makeText(MainActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                        Intent intentt = new Intent(MainActivity.this, SearchLayout.class);
+                        startActivity(intentt);
+                    }else{
+                        Toast.makeText(MainActivity.this, "INVALID EMAIL OR PASSWORD", Toast.LENGTH_SHORT).show();
+                    }
+                }
+//                Intent intentt = new Intent(MainActivity.this, SearchLayout.class);
+//                        startActivity(intentt);
             }
         }));
 
-        DbHelper dbHelper = new DbHelper(MainActivity.this);
+
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if(db != null){
             Toast.makeText(MainActivity.this, "DB CREATED", Toast.LENGTH_LONG).show();
